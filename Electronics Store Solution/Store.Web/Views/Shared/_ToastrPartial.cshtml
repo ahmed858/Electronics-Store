@@ -1,0 +1,11 @@
+﻿@if (TempData["ToasterMessage"] != null)
+{
+
+    <script src="~/lib/jquery/dist/jquery.js"></script> <!-- jQuery-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr['@TempData["ToasterNotification"]']('@TempData["ToasterMessage"]')
+    </script>
+    
+    TempData["ToasterMessage"] = null;
+}
