@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Web", "Store.Web\Store.Web.csproj", "{B2F44E63-E87E-440D-9184-CD023C66A9F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.Web", "Store.Web\Store.Web.csproj", "{B2F44E63-E87E-440D-9184-CD023C66A9F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Entities", "Store.Entities\Store.Entities.csproj", "{336F8D32-80B5-4BAB-B224-C6701B96CDB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.DataAccess", "Store.DataAccess\Store.DataAccess.csproj", "{7623A114-7D61-46DD-9EB0-031001F7FF0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{B2F44E63-E87E-440D-9184-CD023C66A9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2F44E63-E87E-440D-9184-CD023C66A9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2F44E63-E87E-440D-9184-CD023C66A9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{336F8D32-80B5-4BAB-B224-C6701B96CDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{336F8D32-80B5-4BAB-B224-C6701B96CDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{336F8D32-80B5-4BAB-B224-C6701B96CDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{336F8D32-80B5-4BAB-B224-C6701B96CDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7623A114-7D61-46DD-9EB0-031001F7FF0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7623A114-7D61-46DD-9EB0-031001F7FF0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7623A114-7D61-46DD-9EB0-031001F7FF0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7623A114-7D61-46DD-9EB0-031001F7FF0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

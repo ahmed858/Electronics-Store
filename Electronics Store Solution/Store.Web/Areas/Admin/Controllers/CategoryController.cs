@@ -1,20 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Store.Web.Data;
-using Store.Web.Models;
+using Store.DataAccess.Data;
+using Store.DataAccess.Implementation;
+using Store.Entities.Models;
+using Store.Entities.Repositories;
 
-namespace Store.Web.Controllers
+namespace Store.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public CategoryController(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            var Categories = _context.Categories.ToList();
+            //_context.Categories.ToList();
+            var Categories = _unitOfWork.Category.GetAll();
+
+
             return View(Categories);
         }
 
@@ -31,8 +38,11 @@ namespace Store.Web.Controllers
             // server side validation 
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(category);
-                _context.SaveChanges();
+                //_context.Categories.Add(category);
+                //_context.SaveChanges();
+
+                _unitOfWork.Category.Add(category);
+                _unitOfWork.Complete();
                 TempData["ToasterMessage"] = "Category Created Successfuly";
                 TempData["ToasterNotification"] = "success";
                 return RedirectToAction("Index");
@@ -51,7 +61,9 @@ namespace Store.Web.Controllers
                 return NotFound();
             }
             // get that category from database
-            var cate = _context.Categories.Find(id);
+            //_context.Categories.Find(id);
+            var cate = _unitOfWork.Category.GetFirstOrDefault(x => x.Id == id);
+
             return View(cate);
         }
 
@@ -62,8 +74,11 @@ namespace Store.Web.Controllers
             // server side validation 
             if (ModelState.IsValid)
             {
-                _context.Categories.Update(category);
-                _context.SaveChanges();//commit
+                //_context.Categories.Update(category);
+                _unitOfWork.Category.Update(category);
+                //_context.SaveChanges();//commit
+                _unitOfWork.Complete();
+
                 TempData["ToasterMessage"] = "Category Updated Successfuly";
                 TempData["ToasterNotification"] = "info";
                 return RedirectToAction("Index");
@@ -77,23 +92,25 @@ namespace Store.Web.Controllers
 
         public IActionResult Delete(int? id)
         {
-            if(id==null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var Cate = _context.Categories.Find(id);
+            var Cate = _unitOfWork.Category.GetFirstOrDefault(x => x.Id == id);  //_context.Categories.Find(id);
             return View(Cate);
         }
         public IActionResult DeleteCategory(int? id)
         {
-             
-            var Cate = _context.Categories.Find(id);
 
-            if(Cate == null)
+            var Cate = _unitOfWork.Category.GetFirstOrDefault(x => x.Id == id); //_context.Categories.Find(id);
+
+            if (Cate == null)
                 return NotFound();
 
-            _context.Categories.Remove(Cate);
-            _context.SaveChanges();
+            //_context.Categories.Remove(Cate);
+            //_context.SaveChanges();
+            _unitOfWork.Category.Remove(Cate);
+            _unitOfWork.Complete();
             TempData["ToasterMessage"] = "Category Deleted Successfuly";
             TempData["ToasterNotification"] = "success";
             return RedirectToAction("Index");

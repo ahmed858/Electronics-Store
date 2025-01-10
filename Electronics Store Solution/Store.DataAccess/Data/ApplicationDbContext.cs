@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Store.Web.Models;
+using Store.Entities.Models;
 
-namespace Store.Web.Data
+namespace Store.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -13,6 +13,8 @@ namespace Store.Web.Data
 
         }
         public DbSet<Category>Categories { get; set; }
+        public DbSet<Product>Products { get; set; }
+
 
     }
 }

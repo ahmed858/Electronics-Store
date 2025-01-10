@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Store.Web.Data;
+using Store.DataAccess.Data;
+using Store.DataAccess.Implementation;
+using Store.Entities.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServe
     builder.Configuration.GetConnectionString("DefaultConnection") //=> U can add it as string
                                                                    // like that: "Server=.;Database=Electronics_Store;Trusted_Connection=True;Integrated Security=True;MultipleActiveResultSets=True;"
     ));
+
+
+// Inject UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
@@ -33,6 +39,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
