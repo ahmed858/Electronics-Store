@@ -36,10 +36,12 @@ namespace Store.DataAccess.Implementation
             }
             if (IncludeWords != null)
             {
+
                 // context.product.include("Category,Logos,Users")
                 foreach (var word in IncludeWords.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(word);
+
+                    query = query.Include(word);
                 }
             }
 

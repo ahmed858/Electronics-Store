@@ -1,0 +1,66 @@
+﻿@model ProductVM
+
+@{
+    ViewBag.PageTitle = "Product Management";
+    ViewBag.CardTitle = "Edit Product";
+
+    Layout = "~/Views/shared/_Dashboard.cshtml";
+
+}
+
+
+<div class="row">
+    <div class="col-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Product.Id" />
+            <input type="hidden" asp-for="Product.ImgURL" />
+            <div class="md-3">
+                <label asp-for="Product.Name"> </label>
+                <input class="form-control" asp-for="Product.Name" />
+                <span class="text-danger" asp-validation-for="Product.Name"></span>
+            </div>
+            <div class="md-3">
+                <label asp-for="Product.Description"> </label>
+                <input class="form-control" asp-for="Product.Description" />
+                <span class="text-danger" asp-validation-for="Product.Description"></span>
+
+            </div>
+            <div class="md-3">
+                <label asp-for="Product.Price"> </label>
+                <input class="form-control" asp-for="Product.Price" />
+                <span class="text-danger" asp-validation-for="Product.Price"></span>
+
+            </div>
+            <div class="md-3">
+                <label asp-for="Product.ImgURL"> </label>
+                <input class="form-control" type="file" name="file" id="productImgFile" />
+
+            </div>
+            <div class="md-3">
+                <label asp-for="Product.CategoryId"> </label>
+                <select class="form-control" asp-for="Product.CategoryId" asp-items="Model.CategoryList">
+                    <!-- CategoryList is null if not fill it [fill it in controller]-->
+                    <option disabled selected>-- Selcet Item -- </option>
+                </select>
+
+
+            </div>
+            <br />
+            <div class="md-3">
+                <button class="btn btn-success" type="submit">Save</button>
+                <a class="btn btn-warning" asp-action="Index" asp-controller="Product">Back</a>
+            </div>
+
+
+        </form>
+    </div>
+   <div class="col-8">
+       <div class="container">
+            <img src="~/@Model.Product.ImgURL" width="300" height="300" />
+       </div>
+   </div>
+ </div>
+<!-- Clint Side Validation -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

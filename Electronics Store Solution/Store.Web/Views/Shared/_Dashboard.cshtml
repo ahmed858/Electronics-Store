@@ -14,6 +14,10 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/css/adminlte.min.css"><!--ok-->
 
+    <!--DataTable sheet-->
+    
+    <link rel="stylesheet" href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+
     <!-- Toastr CSS FILE-->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
@@ -322,18 +326,27 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
+    
+
+    
+    
+
+
     <!-- jQuery -->
     <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="/js/demo.js"></script>
-
-    <!-- font awsome from project files -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
+    <!-- dataTables -->
+    <script src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <!-- toastr App -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

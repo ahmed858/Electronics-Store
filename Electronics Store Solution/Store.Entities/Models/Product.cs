@@ -16,6 +16,7 @@ namespace Store.Entities.Models
         public string  Name { get; set; }
 
         public string Description { get; set; }
+
         [DisplayName("Image")]
         [ValidateNever]
         public string ImgURL { get; set; }

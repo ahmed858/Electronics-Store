@@ -1,7 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Store.DataAccess.Data;
 using Store.DataAccess.Implementation;
 using Store.Entities.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Store.Utilities;
+using Store.Entities.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +20,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServe
                                                                    // like that: "Server=.;Database=Electronics_Store;Trusted_Connection=True;Integrated Security=True;MultipleActiveResultSets=True;"
     ));
 
+// add identity
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
 
-// Inject UnitOfWork
+// add roles 
+//AddDefaultTokenProviders خاصة ب الايميل وكده بس مش فاهمها خالص
+//builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
+//  .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Inject IEmailSender to continue with out error.
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+// Inject UnitOfWork.
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
@@ -36,9 +54,14 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{area=exists}/{controller=Home}/{action=Index}/{id?}");
+    name: "Admin",
+    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute( 
+    name: "Customer",
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
